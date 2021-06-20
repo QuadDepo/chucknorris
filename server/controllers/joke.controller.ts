@@ -53,12 +53,3 @@ export const getJokes = async (req: Request, res: Response) => {
         res.status(500).send({ err: err.message });
     }
 }
-
-export const getJokeByID = async (req: Request, res: Response) => {
-    try {
-
-        // res.send(results)
-    } catch (err) {
-        res.status(500).send({ err: err.message });
-    }
-}
