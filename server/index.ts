@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import jokeRoute from './routes/joke.route';
 import express from 'express';
 
