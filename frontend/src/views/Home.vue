@@ -1,6 +1,9 @@
 <template>
   <div class="joke">
-    <div class="row"> 
+    <div class="row center-xs">
+      <div class="col-xs-8 col-md-4">
+        <img src="assets/logo.svg" />
+      </div>
       <search-wrapper @onSearch="getJokes" />
     </div>
     <div v-if="!loading && !error" class="row"> 
@@ -71,3 +74,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  .joke {
+    padding-top: 3rem;
+  }
+</style>
