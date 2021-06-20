@@ -16,6 +16,10 @@ export default {
   name: 'App',
   components: {
     navbar: Navbar
+  },
+  
+  beforeCreate() {
+    this.$store.commit('initialiseStore');
   }
 }
 </script>
