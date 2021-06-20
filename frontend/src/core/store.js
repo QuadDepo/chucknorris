@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
 
-export default createStore({
+const Store = createStore({
   state() {
     return {
       favourites: [],
@@ -9,6 +9,7 @@ export default createStore({
       loading: false,
       error: false,
       searches: 0,
+      isQuerySearch: true,
     };
   },
   getters: {
@@ -20,6 +21,14 @@ export default createStore({
     },
   },
   mutations: {
+    initialiseStore(state) {
+      // Check if the ID exists
+      if (localStorage.getItem("store")) {
+        this.replaceState(
+          Object.assign(state, JSON.parse(localStorage.getItem("store")))
+        );
+      }
+    },
     addtoFavourites(state, payload) {
       if (this.state.favourites.length === 5) {
         notify({
@@ -93,3 +102,9 @@ export default createStore({
     },
   },
 });
+
+Store.subscribe((mutation, state) => {
+  localStorage.setItem("store", JSON.stringify(state));
+});
+
+export default Store;
