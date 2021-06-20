@@ -59,6 +59,9 @@ export default createStore({
     setSearchCount(state) {
       state.searches = ++state.searches;
     },
+    toggleIsQuerySearch(state) {
+      state.isQuerySearch = !state.isQuerySearch;
+    },
   },
   actions: {
     async fetchJokes({ commit }, payload) {
