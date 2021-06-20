@@ -44,19 +44,11 @@ export default {
 
     getJokes(random) {
       const payload = {...this.$route.query}
-      // convert string to bool
 
+      // If random jokes ignore payload
       if (random) {
         this.fetchJokes()
         return;
-      }
-
-      if (!this.isQuerySearch) {
-        delete payload.query;
-      }
-
-      if (this.isQuerySearch) {
-        delete payload.categories;
       }
 
       this.fetchJokes(payload)

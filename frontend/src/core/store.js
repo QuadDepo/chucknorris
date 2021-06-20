@@ -73,22 +73,40 @@ const Store = createStore({
     },
   },
   actions: {
-    async fetchJokes({ commit }, payload) {
+    async fetchJokes({ commit, state }, payload) {
       try {
+        // if isSearchQuery is false remove the query from the payload to only filter on active checkboxes.
+        if (!state.isQuerySearch) {
+          delete payload?.query;
+        }
+
+        // if isSearchQuery is true remove the checkboxes from the payload to only filter on query.
+        if (state.isQuerySearch) {
+          delete payload?.categories;
+        }
+
+        // Create url Params
         const queryString = new URLSearchParams(payload);
+        // Set loading to true for UI change
         commit("setLoading", true);
+        // Set older Error back to false
         commit("setError", false);
 
+        // Get Jokes
         const data = await fetch(`/jokes?${queryString}`);
         const res = await data.json();
 
+        // Handle 500 error status and create error with err message
         if (data.status === 500) throw new Error(res.err);
 
+        // Increment search count for UI change, to check if this was not the first time.
         commit("setSearchCount");
+        // Set Jokes in store
         commit("setJokes", res);
       } catch (error) {
         commit("setError", error);
 
+        // Create error notification
         notify({
           title: "Chuck Norris says no!",
           text: error,
@@ -97,14 +115,17 @@ const Store = createStore({
 
         console.error(error);
       } finally {
+        // Set Loading to false
         commit("setLoading", false);
       }
     },
   },
 });
 
-Store.subscribe((mutation, state) => {
-  localStorage.setItem("store", JSON.stringify(state));
+// Subscribe to store to save to LocalStorage
+Store.subscribe((mutation, { favourites, isQuerySearch }) => {
+  // Only save state elements that are needed.
+  localStorage.setItem("store", JSON.stringify({ favourites, isQuerySearch }));
 });
 
 export default Store;
