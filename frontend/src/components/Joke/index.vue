@@ -42,8 +42,7 @@ export default {
   methods: {
     ...mapMutations(["addtoFavourites", "removefromFavourites"]),
 
-    toggleFavourite(e) {
-      console.log(e);
+    toggleFavourite() {
       if (this.isFavourite) {
         this.removefromFavourites(this.joke.id);
         return;
@@ -64,10 +63,6 @@ export default {
     width: 100%;
     padding-bottom: 1rem;
     border-bottom: 1px solid #e4e4e4;;
-
-    &:last-of-type:not(:first-of-type){
-      padding-bottom: 0;
-    }
 
     & + & {
       padding-top: 1rem;
