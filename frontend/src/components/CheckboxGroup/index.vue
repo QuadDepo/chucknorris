@@ -106,16 +106,8 @@ export default {
   },
 
   mounted() {
-    if (this.defaultChecked.length === 0) {
-      return;
-    }
-
-    if (Array.isArray(this.defaultChecked)) {
-      this.checkedOptions = this.defaultChecked;
-      return;
-    }
-
-    this.checkedOptions = [this.defaultChecked];
+    console.log(this.defaultChecked);
+    this.checkedOptions = [...this.defaultChecked];
   }
 };
 </script>

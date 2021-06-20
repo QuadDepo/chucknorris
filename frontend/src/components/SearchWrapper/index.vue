@@ -77,10 +77,22 @@ export default {
     });
   },
 
-  mounted() {
+  beforeMount() {
+    const { query, categories } = this.$route.query;
+
     // set router query as state
-    this.query = this.$route.query.query;
-    this.categories = this.$route.query.categories;
+    this.query = query
+
+    if (!categories) {
+      return;
+    }
+
+    if (Array.isArray(categories)) {
+      this.categories = categories;
+      return;
+    }
+
+    this.categories = [categories]
   },
 };
 </script>
