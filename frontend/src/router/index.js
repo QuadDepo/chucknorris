@@ -3,8 +3,8 @@ import Home from "../views/Home";
 import Favorites from "../views/Favourites";
 
 const routes = [
-  { path: "/", component: Home },
-  { path: "/favourites", component: Favorites },
+  { name: "Home", path: "/", component: Home },
+  { name: "Favourites", path: "/favourites", component: Favorites },
 ];
 
 const router = createRouter({
