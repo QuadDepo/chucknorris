@@ -4,7 +4,7 @@
       <div class="col-xs-12 col-md-8">
         <keep-alive>
         <search-input
-          v-if="isQuerySearch"
+          v-if="$store.state.isQuerySearch"
           :value="query"
           @keyup.enter="() => emitSearch(false)"
           @input="setValue"
@@ -42,7 +42,6 @@ export default {
 
   data: function() {
     return {
-      isQuerySearch: true,
       query: "",
       categories: [],
     };
@@ -50,7 +49,7 @@ export default {
 
   methods: {
     toggleFilter() {
-      this.isQuerySearch = !this.isQuerySearch;
+      this.$store.commit('toggleIsQuerySearch')
     },
 
     setValue({ target }) {

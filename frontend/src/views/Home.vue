@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     ...mapGetters(["jokes"]),
-    ...mapState(["loading","error", "searches"]),
+    ...mapState(["loading","error", "searches", "isQuerySearch"]),
   },
 
   methods: {
@@ -39,8 +39,7 @@ export default {
       "fetchJokes"
     ]),
 
-    getJokes(random, isQuerySearch) {
-      console.log(isQuerySearch);
+    getJokes(random) {
       const payload = {...this.$route.query}
       // convert string to bool
 
@@ -49,11 +48,11 @@ export default {
         return;
       }
 
-      if (!isQuerySearch) {
+      if (!this.isQuerySearch) {
         delete payload.query;
       }
 
-      if (isQuerySearch) {
+      if (this.isQuerySearch) {
         delete payload.categories;
       }
 
