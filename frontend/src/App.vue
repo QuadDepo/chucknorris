@@ -29,3 +29,9 @@ export default {
     padding: 0 0 3rem 0;
   }
 </style>
+
+<style lang="scss">
+  .vue-notification {
+    margin: 1rem 1rem 0 0;
+  }
+</style>
